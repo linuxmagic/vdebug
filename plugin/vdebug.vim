@@ -59,23 +59,33 @@ if !exists('g:vdebug_leader_key')
     let g:vdebug_leader_key = ''
 endif
 
+" Linuxmagic changed default hotkeys
+" These are custom keymaps for the vdebug plugin. These have basically all been
+" changed to more closely resemble the mappings for the old debug plugin
 let g:vdebug_keymap_defaults = {
-\    'run' : '<F5>',
-\    'run_to_cursor' : '<F9>',
-\    'step_over' : '<F2>',
-\    'step_into' : '<F3>',
-\    'step_out' : '<F4>',
-\    'close' : '<F6>',
-\    'detach' : '<F7>',
-\    'set_breakpoint' : '<F10>',
-\    'get_context' : '<F11>',
+\    'set_breakpoint'    : '<F2>',
+\    'detach'            : '<F3>',
+\    'run'               : '<F5>',
+\    'step_into'         : '<F6>',
+\    'step_over'         : '<F7>',
+\    'step_out'          : '<F8>',
+\    'run_to_cursor'     : '<F9>',
+\    'get_context'       : '<F11>',
 \    'eval_under_cursor' : '<F12>',
-\    'eval_visual' : '<Leader>e'
+\    'close'             : ',q',
+\	 'eval_visual' 		 : ',e'
 \}
 
+" An additional mapping to easily allow someone to enter a custom expression
+" to evaluate (the trailing whitespace is intended to be there so that you
+" can immediately start typing your command)
+vmap ,e "zy:VdebugEval <c-r>z<cr>
+map ,e :VdebugEval
+
+" Linuxmagic changed port from 9000 to 9876, and timeout to 40
 let g:vdebug_options_defaults = {
-\    'port' : 9000,
-\    'timeout' : 20,
+\    'port' : 9876,
+\    'timeout' : 40,
 \    'server' : '',
 \    'on_close' : 'stop',
 \    'break_on_open' : 1,
