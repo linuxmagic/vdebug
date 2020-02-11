@@ -73,14 +73,14 @@ let g:vdebug_keymap_defaults = {
 \    'get_context'       : '<F11>',
 \    'eval_under_cursor' : '<F12>',
 \    'close'             : ',q',
-\	 'eval_visual' 		 : ',e'
 \}
+"\	 'eval_visual' 		 : ',e'
 
 " An additional mapping to easily allow someone to enter a custom expression
 " to evaluate (the trailing whitespace is intended to be there so that you
 " can immediately start typing your command)
 vmap ,e "zy:VdebugEval <c-r>z<cr>
-map ,e :VdebugEval
+map ,e :VdebugEval 
 
 " Linuxmagic changed port from 9000 to 9876, and timeout to 40
 let g:vdebug_options_defaults = {
@@ -236,9 +236,9 @@ function! Vdebug_load_keymaps(keymaps)
     if has_key(g:vdebug_keymap, 'set_breakpoint')
         exe 'silent! nunmap '.g:vdebug_keymap['set_breakpoint']
     endif
-    if has_key(g:vdebug_keymap, 'eval_visual')
-        exe 'silent! vunmap '.g:vdebug_keymap['eval_visual']
-    endif
+    "if has_key(g:vdebug_keymap, 'eval_visual')
+    "    exe 'silent! vunmap '.g:vdebug_keymap['eval_visual']
+    "endif
 
     " Merge keymaps with defaults
     let g:vdebug_keymap = extend(g:vdebug_keymap_defaults, a:keymaps)
@@ -250,7 +250,7 @@ function! Vdebug_load_keymaps(keymaps)
     exe 'noremap '.g:vdebug_keymap['set_breakpoint'].' :python3 debugger.set_breakpoint()<cr>'
 
     " Exceptional case for visual evaluation
-    exe 'vnoremap '.g:vdebug_keymap['eval_visual'].' :python3 debugger.handle_visual_eval()<cr>'
+    "exe 'vnoremap '.g:vdebug_keymap['eval_visual'].' :python3 debugger.handle_visual_eval()<cr>'
     python3 debugger.reload_keymappings()
 endfunction
 
