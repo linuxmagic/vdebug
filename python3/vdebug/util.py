@@ -112,11 +112,44 @@ class Keymapper:
         self._reload_keys()
         self.existing = []
 
+    def breakpoint_key(self):
+        return self.keymaps['set_breakpoint']
+
+    def detach_key(self):
+        return self.keymaps['detach']
+
     def run_key(self):
         return self.keymaps['run']
 
+    def step_into_key(self):
+        return self.keymaps['step_into']
+
+    def step_over_key(self):
+        return self.keymaps['step_over']
+
+    def step_out_key(self):
+        return self.keymaps['step_out']
+
+    def run_to_cursor_key(self):
+        return self.keymaps['run_to_cursor']
+
+    def get_context_key(self):
+        return self.keymaps['get_context']
+
+    def eval_under_cursor_key(self):
+        return self.keymaps['eval_under_cursor']
+
     def close_key(self):
         return self.keymaps['close']
+
+    def keymap_string(self):
+        keymap_str  = "--[Hotkeys]-----------------------------------------\n";
+        keymap_str += " %s - Set Breakpoint  | %s  - Step Into\n" % (self.breakpoint_key(), self.step_into_key())
+        keymap_str += " %s - Detach          | %s  - Step Over\n" % (self.detach_key(), self.step_over_key())
+        keymap_str += " %s - Run             | %s  - Step Out\n" % (self.run_key(), self.step_out_key())
+        keymap_str += " %s - Run to Cursor   | %s - Get Context\n" % (self.run_to_cursor_key(), self.get_context_key())
+        keymap_str += "   %s - Stop            | %s - Eval Under Cursor\n" % (self.close_key(), self.eval_under_cursor_key())
+        return keymap_str
 
     def map(self):
         log.Log("keymapper: map", log.Logger.DEBUG)

@@ -80,7 +80,7 @@ let g:vdebug_keymap_defaults = {
 " to evaluate (the trailing whitespace is intended to be there so that you
 " can immediately start typing your command)
 vmap ,e "zy:VdebugEval <c-r>z<cr>
-map ,e :VdebugEval 
+nmap ,e :VdebugEval 
 
 " Linuxmagic changed port from 9000 to 9876, and timeout to 40
 let g:vdebug_options_defaults = {

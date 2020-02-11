@@ -141,7 +141,7 @@ class Ui(interface.Ui):
                 'window_commands': {
                     'DebuggerWatch': 'vertical belowright new',
                     'DebuggerStack': 'aboveleft 12new',
-                    'DebuggerStatus': 'aboveleft 1new'
+                    'DebuggerStatus': 'aboveleft 7new'
                 },
                 'window_size': {
                 },
@@ -724,6 +724,8 @@ class StatusWindow(Window):
             keys = util.Keymapper()
             if opts.Options.get("simplified_status", int):
                 self.set_status("listening")
+                keys = util.Keymapper()
+                self.write(keys.keymap_string())
             else:
                 output = "Status: starting\nListening on port\nNot connected\n\n"
                 output += "Press %s to start debugging, " % (keys.run_key())
@@ -734,23 +736,15 @@ class StatusWindow(Window):
 
     def set_status(self, status):
         if opts.Options.get("simplified_status", int):
+            output = "Debugger Status: "
             if str(status) == "listening":
-                status = "●"
+                output += "●  listening"
             if str(status) == "stopped":
-                status = "■"
+                output += "■  stopped"
             if str(status) == "running":
-                status = "▶"
+                output += "▶ running"
             if str(status) == "break":
-                status = "▌▌"
-
-            keys = util.Keymapper()
-
-            output = " " + str(status) + " "
-            output += "[%s Start] " % (keys.run_key())
-            output += "[%s Stop] " % (keys.close_key())
-            output += "[:help Vdebug]"
-            output += "\n[ Step Over]"
-
+                output += "▌▌ paused"
             self.insert(output, 0, True)
         else:
             self.insert("Status: %s" % str(status), 0, True)
