@@ -159,7 +159,7 @@ class Ui(interface.Ui):
                 },
                 'window_size': {
                     'DebuggerWatch': { 'height' : 15 },
-                    'DebuggerStatus':  { 'height' : 1 }
+                    'DebuggerStatus':  { 'height' : 3 }
                 },
                 'window_arrangement': [
                     'DebuggerWatch',
@@ -749,6 +749,7 @@ class StatusWindow(Window):
             output += "[%s Start] " % (keys.run_key())
             output += "[%s Stop] " % (keys.close_key())
             output += "[:help Vdebug]"
+            output += "\n[ Step Over]"
 
             self.insert(output, 0, True)
         else:
