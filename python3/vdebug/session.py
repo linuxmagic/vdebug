@@ -1,4 +1,5 @@
 import socket
+import time
 
 import vim
 
@@ -36,7 +37,6 @@ class SessionHandler:
         if self.listener and self.listener.is_listening():
             print("Waiting for a connection: none found so far")
         elif self.listener and self.listener.is_ready():
-            print("Found connection, starting debugger")
             self.__new_session()
         else:
             self.start_listener()
@@ -48,7 +48,10 @@ class SessionHandler:
         if self.is_open():
             self.ui().set_status("listening")
         self.listener.start()
-        self.start_if_ready()
+        # keep trying to start it if autostart is on
+        if opts.Options.get("auto_start", int):
+            while not self.start_if_ready():
+                time.sleep(0.1)
 
     def stop_listening(self):
         if self.listener:
@@ -101,7 +104,6 @@ class SessionHandler:
     def start_if_ready(self):
         try:
             if self.listener.is_ready():
-                print("Found connection, starting debugger")
                 self.__new_session()
                 return True
             return False
