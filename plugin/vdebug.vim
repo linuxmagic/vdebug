@@ -101,7 +101,7 @@ let g:vdebug_options_defaults = {
 \    'sign_breakpoint' : '▷',
 \    'sign_current' : '▶',
 \    'sign_disabled': '▌▌',
-\    'continuous_mode'  : 1,
+\    'continuous_mode'  : 0,
 \    'background_listener' : 1,
 \    'auto_start' : 1,
 \    'simplified_status': 1,
